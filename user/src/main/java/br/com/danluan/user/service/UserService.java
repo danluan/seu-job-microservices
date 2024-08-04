@@ -1,6 +1,6 @@
 package br.com.danluan.user.service;
 
-import br.com.danluan.user.entity.User;
+import br.com.danluan.user.model.User;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,4 +1,4 @@
-package br.com.danluan.user.entity.dto;
+package br.com.danluan.user.model.dto;
 
 
 public class CredenciaisDto {

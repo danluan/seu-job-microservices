@@ -1,7 +1,7 @@
 package br.com.danluan.user.resource;
 
-import br.com.danluan.user.entity.dto.CredenciaisDto;
-import br.com.danluan.user.entity.dto.UserDto;
+import br.com.danluan.user.model.dto.CredenciaisDto;
+import br.com.danluan.user.model.dto.UserDto;
 import br.com.danluan.user.service.impl.UserServiceImpl;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,10 +1,8 @@
-package br.com.danluan.user.entity.dto;
+package br.com.danluan.user.model.dto;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
-
-import java.util.List;
 
 public class UserDto {
     public UserDto() {};

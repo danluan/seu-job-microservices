@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 
 import br.com.danluan.user.exception.EmailAlreadyInUse;
 import br.com.danluan.user.exception.LoginAlreadyInUse;
-import br.com.danluan.user.entity.dto.UserDto;
-import br.com.danluan.user.entity.User;
+import br.com.danluan.user.model.dto.UserDto;
+import br.com.danluan.user.model.User;
 import br.com.danluan.user.repository.*;
 import javax.transaction.Transactional;
 
@@ -20,17 +20,23 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
+
     public PasswordEncoder passwordEncoder;
 
     @Autowired
     private UserRepository userRepository;
+
+    UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Transactional
     public UserDto save(UserDto UserDto) {
         if (!existsLogin(UserDto.getLogin())) {
             if (!existsEmail(UserDto.getEmail())) {
                 User user = dtoParaUser(UserDto);
-                user.setPassword(passwordEncoder.encode(user.getPassword()));
+                //user.setPassword(passwordEncoder.encode(user.getPassword()));
+                user.setPassword(user.getPassword());
                 return userParaDTO(userRepository.save(user));
             } else {
                 throw new EmailAlreadyInUse();

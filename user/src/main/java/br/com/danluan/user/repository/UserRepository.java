@@ -1,10 +1,9 @@
 package br.com.danluan.user.repository;
 
-import br.com.danluan.user.entity.User;
+import br.com.danluan.user.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Optional;
 

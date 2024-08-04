@@ -1,6 +1,8 @@
-package br.com.danluan.user.entity;
+package br.com.danluan.user.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_user")
@@ -29,17 +31,17 @@ public class User {
     @Column(length = 15)
     private String phoneNumber;
 
-//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private List<Company> companies = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private List<Worker> workers = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private List<Freelancer> freelancers = new ArrayList<>();
-//
-//    @OneToOne(mappedBy = "user")
-//    private Admin admin;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Company> companies = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Worker> workers = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Freelancer> freelancers = new ArrayList<>();
+
+    @OneToOne(mappedBy = "user")
+    private Admin admin;
 
     public User(String name, String login, String email, String password, String phoneNumber) {
         this.name = name;
@@ -49,26 +51,26 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-//    public boolean isAdmin() {
-//        return admin != null;
-//    }
+    public boolean isAdmin() {
+        return admin != null;
+    }
 
-//    public List<String> getRolesByUser(){
-//        List<String> roles = new ArrayList<>();
-//        if(!companies.isEmpty()){
-//            roles.add("COMPANY");
-//        }
-//        if(!workers.isEmpty()){
-//            roles.add("WORKER");
-//        }
-//        if(!freelancers.isEmpty()){
-//            roles.add("FREELANCER");
-//        }
-//        if(!(admin == null)){
-//            roles.add("ADMIN");
-//        }
-//        return roles;
-//    }
+    public List<String> getRolesByUser(){
+        List<String> roles = new ArrayList<>();
+        if(!companies.isEmpty()){
+            roles.add("COMPANY");
+        }
+        if(!workers.isEmpty()){
+            roles.add("WORKER");
+        }
+        if(!freelancers.isEmpty()){
+            roles.add("FREELANCER");
+        }
+        if(!(admin == null)){
+            roles.add("ADMIN");
+        }
+        return roles;
+    }
 
 
     public Integer getId() {
