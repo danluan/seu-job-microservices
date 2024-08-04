@@ -13,7 +13,7 @@ import java.util.List;
 
 @RefreshScope
 @RestController
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/")
 public class UserResource {
     @Autowired
     private UserServiceImpl userService;
