@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.danluan.user.exception.EmailAlreadyInUse;
 import br.com.danluan.user.exception.LoginAlreadyInUse;
-import br.com.danluan.user.model.dto.UserDto;
+import br.com.danluan.user.model.dto.UserDTO;
 import br.com.danluan.user.model.User;
 import br.com.danluan.user.repository.*;
 import javax.transaction.Transactional;
@@ -31,10 +31,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional
-    public UserDto save(UserDto UserDto) {
-        if (!existsLogin(UserDto.getLogin())) {
-            if (!existsEmail(UserDto.getEmail())) {
-                User user = dtoParaUser(UserDto);
+    public UserDTO save(UserDTO UserDTO) {
+        if (!existsLogin(UserDTO.getLogin())) {
+            if (!existsEmail(UserDTO.getEmail())) {
+                User user = dtoParaUser(UserDTO);
                 //user.setPassword(passwordEncoder.encode(user.getPassword()));
                 user.setPassword(user.getPassword());
                 return userParaDTO(userRepository.save(user));
@@ -59,55 +59,55 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(id).orElse(null);
     }
 
-    public UserDto getUserDtoById(int id) {
+    public UserDTO getUserDTOById(int id) {
         User user = userRepository.findById(id).orElse(null);
         return user == null ? null : userParaDTO(user);
     }
 
-    public UserDto getUserByLogin(String login) {
+    public UserDTO getUserByLogin(String login) {
         User user = userRepository.findByLogin(login)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado na base de dados."));
         return userParaDTO(user);
     }
 
-    public User dtoParaUser(UserDto UserDto){
+    public User dtoParaUser(UserDTO UserDTO){
         User user = new User();
-        user.setLogin(UserDto.getLogin());
-        user.setEmail(UserDto.getEmail());
-        user.setName(UserDto.getName());
-        user.setPassword(UserDto.getPassword());
-        user.setPhoneNumber(UserDto.getPhone());
+        user.setLogin(UserDTO.getLogin());
+        user.setEmail(UserDTO.getEmail());
+        user.setName(UserDTO.getName());
+        user.setPassword(UserDTO.getPassword());
+        user.setPhoneNumber(UserDTO.getPhone());
 
         return user;
     }
 
-    public UserDto userParaDTO(User user){
-        UserDto UserDto = new UserDto();
-        UserDto.setId(user.getId());
-        UserDto.setLogin(user.getLogin());
-        UserDto.setEmail(user.getEmail());
-        UserDto.setName(user.getName());
-        UserDto.setPassword(user.getPassword());
-        UserDto.setPhone(user.getPhoneNumber());
-//        UserDto.setRoles(user.getRolesByUser());
-        return UserDto;
+    public UserDTO userParaDTO(User user){
+        UserDTO UserDTO = new UserDTO();
+        UserDTO.setId(user.getId());
+        UserDTO.setLogin(user.getLogin());
+        UserDTO.setEmail(user.getEmail());
+        UserDTO.setName(user.getName());
+        UserDTO.setPassword(user.getPassword());
+        UserDTO.setPhone(user.getPhoneNumber());
+//        UserDTO.setRoles(user.getRolesByUser());
+        return UserDTO;
     }
 
-    public List<UserDto> getAllUsers() {
+    public List<UserDTO> getAllUsers() {
         List<User> users = userRepository.findAll();
         return users.stream().map(this::userParaDTO).collect(Collectors.toList());
     }
 
 
-    public UserDto update(UserDto UserDto) {
-        User user = getUserById(UserDto.getId());
-        user.setName(UserDto.getName());
-        user.setEmail(UserDto.getEmail());
-        user.setLogin(UserDto.getLogin());
-        user.setPassword(UserDto.getPassword());
-        user.setPhoneNumber(UserDto.getPhone());
+    public UserDTO update(UserDTO UserDTO) {
+        User user = getUserById(UserDTO.getId());
+        user.setName(UserDTO.getName());
+        user.setEmail(UserDTO.getEmail());
+        user.setLogin(UserDTO.getLogin());
+        user.setPassword(UserDTO.getPassword());
+        user.setPhoneNumber(UserDTO.getPhone());
 
-//        extractRolesByList(UserDto, user);
+//        extractRolesByList(UserDTO, user);
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userParaDTO(userRepository.save(user));

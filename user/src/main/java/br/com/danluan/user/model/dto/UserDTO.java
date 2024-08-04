@@ -4,8 +4,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
-public class UserDto {
-    public UserDto() {};
+public class UserDTO {
+    public UserDTO() {};
 
     private Integer id;
 
@@ -28,7 +28,7 @@ public class UserDto {
 
 //    private List<String> roles;
 
-    public UserDto(String name, String email, String login, String password, String phone) {
+    public UserDTO(String name, String email, String login, String password, String phone) {
         this.name = name;
         this.email = email;
         this.login = login;

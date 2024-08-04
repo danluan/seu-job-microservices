@@ -1,7 +1,7 @@
 package br.com.danluan.user.resource;
 
 import br.com.danluan.user.model.dto.CredenciaisDto;
-import br.com.danluan.user.model.dto.UserDto;
+import br.com.danluan.user.model.dto.UserDTO;
 import br.com.danluan.user.service.impl.UserServiceImpl;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,28 +19,28 @@ public class UserResource {
     private UserServiceImpl userService;
 
     @GetMapping
-    public List<UserDto> getAllUsers() {
+    public List<UserDTO> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @GetMapping("{id}")
-    public UserDto getUserById(@PathVariable Integer id) {
-        return userService.getUserDtoById(id);
+    public UserDTO getUserById(@PathVariable Integer id) {
+        return userService.getUserDTOById(id);
     }
 
     @PostMapping("/getUser")
-    public UserDto getUserById(@RequestBody CredenciaisDto credenciais) {
+    public UserDTO getUserById(@RequestBody CredenciaisDto credenciais) {
         return userService.getUserByLogin(credenciais.getLogin());
     }
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public UserDto salvar( @RequestBody @Valid UserDto UserDto ){
+    public UserDTO salvar( @RequestBody @Valid UserDTO UserDto ){
         return userService.save(UserDto);
     }
 
     @PutMapping("{id}")
-    public UserDto updateUser(@RequestBody @Valid UserDto UserDto, @PathVariable Integer id) {
+    public UserDTO updateUser(@RequestBody @Valid UserDTO UserDto, @PathVariable Integer id) {
         UserDto.setId(id);
         return userService.update(UserDto);
     }
