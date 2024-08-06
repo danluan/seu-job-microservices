@@ -16,8 +16,8 @@ public class Worker {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    @OneToMany(mappedBy = "worker", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Application> applications;
+//    @OneToMany(mappedBy = "worker", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<Application> applications;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = true)
     @JoinColumn(name = "resume_id", referencedColumnName = "id")
@@ -46,13 +46,13 @@ public class Worker {
         this.user = user;
     }
 
-    public List<Application> getApplications() {
-        return applications;
-    }
+//    public List<Application> getApplications() {
+//        return applications;
+//    }
 
-    public void setApplications(List<Application> applications) {
-        this.applications = applications;
-    }
+//    public void setApplications(List<Application> applications) {
+//        this.applications = applications;
+//    }
 
     public Resume getResume() {
         return resume;
@@ -67,7 +67,7 @@ public class Worker {
         return "Worker{" +
                 "id=" + id +
                 ", user=" + user +
-                ", applications=" + applications +
+//                ", applications=" + applications +
                 ", resume=" + resume +
                 '}';
     }

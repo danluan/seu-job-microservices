@@ -16,8 +16,8 @@ public class Service {
     @ManyToOne(fetch = FetchType.LAZY)
     private Freelancer freelancer;
 
-    @OneToMany(mappedBy = "service", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Application> applications;
+//    @OneToMany(mappedBy = "service", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<Application> applications;
 
     @Column(nullable = false, length = 100)
     private String title;
@@ -66,13 +66,13 @@ public class Service {
         this.freelancer = freelancer;
     }
 
-    public List<Application> getApplications() {
-        return applications;
-    }
+//    public List<Application> getApplications() {
+//        return applications;
+//    }
 
-    public void setApplications(List<Application> applications) {
-        this.applications = applications;
-    }
+//    public void setApplications(List<Application> applications) {
+//        this.applications = applications;
+//    }
 
     public String getTitle() {
         return title;

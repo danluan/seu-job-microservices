@@ -23,8 +23,8 @@ public class Company {
     @Column(length = 18)
     private String cnpj;
 
-    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Job> jobs;
+//    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<Job> jobs;
 
     public Company() {
     }

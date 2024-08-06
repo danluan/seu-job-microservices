@@ -3,6 +3,7 @@ package br.com.danluan.user.service.impl;
 import br.com.danluan.user.exception.UserIdAlreadyInUseException;
 import br.com.danluan.user.exception.UserNotFoundException;
 import br.com.danluan.user.exception.WorkerNotFoundException;
+import br.com.danluan.user.feignclients.ApplicationFeignClient;
 import br.com.danluan.user.model.Resume;
 import br.com.danluan.user.model.User;
 import br.com.danluan.user.model.Worker;
@@ -26,8 +27,9 @@ public class WorkerServiceImpl implements WorkerService {
 
     @Autowired
     private UserServiceImpl userService;
+
     @Autowired
-    private UserRepository userRepository;
+    private ApplicationFeignClient applicationFeignClient;
 
     @Override
     public List<WorkerDTO> getAllWorkers() {
@@ -100,18 +102,16 @@ public class WorkerServiceImpl implements WorkerService {
         workerDTO.setLogin(worker.getUser().getLogin());
         workerDTO.setPhone(worker.getUser().getPhoneNumber());
 
-        if (worker.getApplications() != null) {
-            workerDTO.setApplications(worker.getApplications().stream().map((application -> {
+        List<ApplicationDTO> applicationsByWorker = applicationFeignClient.getAllApplicationsByWorkerId(worker.getId()).getBody();
+
+        if (applicationsByWorker != null) {
+            workerDTO.setApplications(applicationsByWorker.stream().map((application -> {
                 ApplicationDTO applicationDTO = new ApplicationDTO();
                 applicationDTO.setId(application.getId());
-                applicationDTO.setWorkerId(application.getWorker().getId());
-                if (application.getJob() != null)
-                    applicationDTO.setJobId(application.getJob().getId());
-
-                if (application.getService() != null)
-                    applicationDTO.setServiceId(application.getService().getId());
+                applicationDTO.setWorkerId(application.getWorkerId());
+                    applicationDTO.setJobId(application.getJobId());
                 applicationDTO.setStatus(application.getStatus());
-                applicationDTO.setDateApply(application.getApplyDate());
+                applicationDTO.setDateApply(application.getDateApply());
                 return applicationDTO;
             })).collect(Collectors.toList()));
         }
