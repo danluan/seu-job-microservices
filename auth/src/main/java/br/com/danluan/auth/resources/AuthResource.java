@@ -26,6 +26,7 @@ public class AuthResource {
     @ResponseStatus(HttpStatus.OK)
     public String login(@RequestBody CredenciaisDTO credenciais) {
         try {
+            System.out.println("Credenciais: " + credenciais.getLogin() + " " + credenciais.getPassword());
             User user = userServiceClient.getUserByUsername(credenciais.getLogin());
 
             return "Usuário autenticado: " + user.getLogin();

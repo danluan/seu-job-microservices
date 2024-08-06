@@ -28,6 +28,11 @@ public class UserResource {
         return userService.getUserDTOById(id);
     }
 
+    @GetMapping("{login}")
+    public UserDTO getUserByLogin(@PathVariable String login) {
+        return userService.getUserByLogin(login);
+    }
+
     @PostMapping("/getUser")
     public UserDTO getUserById(@RequestBody CredenciaisDto credenciais) {
         return userService.getUserByLogin(credenciais.getLogin());

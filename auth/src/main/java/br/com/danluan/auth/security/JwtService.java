@@ -24,9 +24,6 @@ public class JwtService {
     @Value("${security.jwt.chave-assinatura}")
     private String chaveAssinatura;
 
-
-
-
     public String gerarToken( User user ){
 
         Date data = converter(expiracao); //a forma de passar para o jwt a data de expiração
@@ -40,12 +37,8 @@ public class JwtService {
                 .signWith(key) //assinatura do token (recebe parametro key)
                 .compact();
     }
-    //https://jwt.io
-
-
 
     private Claims obterClaims(String token ) throws ExpiredJwtException { //lança erro caso o token tenha sido expirado
-
         //chave de assinatura
         SecretKey key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(chaveAssinatura));
 
@@ -70,7 +63,6 @@ public class JwtService {
         }
     }
 
-
     public String obterLoginUsuario(String token) throws ExpiredJwtException{
         return (String) (obterClaims(token)).getSubject();
     }
@@ -83,27 +75,4 @@ public class JwtService {
         Date data = Date.from(instant); //a forma de passar para o jwt a data de expiração
         return data;
     }
-
-
-    /* public static void main(String[] args){
-
-
-        ConfigurableApplicationContext contexto = SpringApplication.run(SpringRestApiAppApplication.class);
-        JwtService service = contexto.getBean(JwtService.class);
-        Usuario usuario = Usuario.builder().login("fulano").build();
-        System.out.println("Gerando token");
-        String token = service.gerarToken(usuario);
-        System.out.println(token);
-
-        System.out.println("Verifica se o token é válido");
-        boolean isTokenValido = service.tokenValido(token);
-        System.out.println("O token é válido? " + isTokenValido);
-
-        System.out.println("Obtenha o login do usuário");
-        String login = service.obterLoginUsuario(token);
-        System.out.println(login);
-
-
-
-    } */
 }
