@@ -11,7 +11,7 @@ public interface JobService {
     JobDTO getJobById(Integer id);
     Job getJobEntityById(Integer id);
     JobDTO save(JobDTO jobDTO);
-    JobDTO updateJob(JobDTO jobDTO);
+    JobDTO updateJob(JobDTO jobDTO, Integer id);
     void deleteJob(Integer id);
     JobDTO toDTO(Job job);
     Job toEntity(JobDTO jobDTO);

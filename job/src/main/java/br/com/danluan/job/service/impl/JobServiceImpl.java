@@ -69,8 +69,13 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public JobDTO updateJob(JobDTO jobDTO) {
-        return null;
+    public JobDTO updateJob(JobDTO jobDTO, Integer id) {
+        Optional<Job> job = jobRepository.findById(id);
+        if (job.isPresent()) {
+            jobDTO.setId(id);
+            return toDTO(jobRepository.save(job.get()));
+        }
+        throw new JobNotFound();
     }
 
     @Override

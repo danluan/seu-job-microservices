@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -43,14 +44,19 @@ public class JobResource {
         return jobService.save(job);
     }
 
+    @PutMapping("{id}")
+    public JobDTO updateJob(@PathVariable Integer id, @RequestBody @Valid JobDTO job) {
+        return jobService.updateJob(job, id);
+    }
+
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public String delete(@PathVariable Integer id) {
+    public ResponseEntity<String> delete(@PathVariable Integer id) {
         try {
             jobService.deleteJob(id);
-            return "Job deleted";
+            return ResponseEntity.ok().build();
         } catch (JobNotFound e) {
-            return e.getMessage();
+            return ResponseEntity.notFound().build();
         }
     }
 
