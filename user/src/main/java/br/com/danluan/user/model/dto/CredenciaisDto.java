@@ -1,6 +1,5 @@
 package br.com.danluan.user.model.dto;
 
-
 public class CredenciaisDto {
     public CredenciaisDto() {}
 
